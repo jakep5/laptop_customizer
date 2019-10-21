@@ -1,4 +1,4 @@
-
+import '../App.css';
 class CartTotal extends React.Component {
     render() {
         return(

@@ -14,6 +14,7 @@ const USCurrencyFormat = new Intl.NumberFormat('en-US', {
 });
 
 class App extends Component {
+  //STATE WILL STAY IN APP 
   state = {
     selected: {
       Processor: {
@@ -35,6 +36,8 @@ class App extends Component {
     }
   };
 
+
+  //THIS FUNCTION WILL STAY IN APP, PASSED BY CALLBACK FUNCTION TO PartsList!
   updateFeature = (feature, newValue) => {
     const selected = Object.assign({}, this.state.selected);
     selected[feature] = newValue;
@@ -73,22 +76,8 @@ class App extends Component {
           {options}
         </fieldset>
       );
-    });
+  });
 
-    const summary = Object.keys(this.state.selected).map((feature, idx) => {
-      const featureHash = feature + '-' + idx;
-      const selectedOption = this.state.selected[feature];
-
-      return (
-        <div className="summary__option" key={featureHash}>
-          <div className="summary__option__label">{feature} </div>
-          <div className="summary__option__value">{selectedOption.name}</div>
-          <div className="summary__option__cost">
-            {USCurrencyFormat.format(selectedOption.cost)}
-          </div>
-        </div>
-      );
-    });
 
     const total = Object.keys(this.state.selected).reduce(
       (acc, curr) => acc + this.state.selected[curr].cost,
@@ -103,18 +92,18 @@ class App extends Component {
         <main>
           <form className="main__form">
             <h2>Customize your laptop</h2>
-            {features}
+            <PartsList //from {features}
+              selected = {selected}
+              features = {features}
+              updateFeature = {() => this.updateFeature(feature)}
+            />
           </form>
-          <section className="main__summary">
-            <h2>Your cart</h2>
-            {summary}
-            <div className="summary__total">
-              <div className="summary__total__label">Total</div>
-              <div className="summary__total__value">
-                {USCurrencyFormat.format(total)}
-              </div>
-            </div>
-          </section>
+          <Cart //from {summary}
+            total = {total}
+            selected={this.state.selected}
+            featureHash = {featureHash}
+            selectedOption = {selectedOption}
+              />
         </main>
       </div>
     );
