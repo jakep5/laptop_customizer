@@ -4,7 +4,6 @@ import Cart from './Cart/Cart';
 
 // Normalizes string as a slug - a string that is safe to use
 // in both URLs and html attributes
-import slugify from 'slugify';
 
 import './App.css';
 
