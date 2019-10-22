@@ -9,8 +9,7 @@ class Cart extends React.Component {
             <section className = "main_summary">
                 <h2>Your cart</h2>
                 <CartItems
-                    featureHash = {this.props.featureHash}
-                    feature = {this.props.feature}
+                    featureS = {this.props.featureS}
                     selected={this.props.selected}
                 />
                 <CartTotal 
